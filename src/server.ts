@@ -1,1 +1,1 @@
-console.log("Projeto com NODE e Typescript configurado");
+console.log('Project com NODE e Typescript configuration');
