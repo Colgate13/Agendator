@@ -1,4 +1,4 @@
-<h1 align="center">Template-nodejs-typescript-dev</h1>
+<h1 align="center">Agendator</h1>
 
 <p align="center">
   <a href="#about">Sobre este projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
