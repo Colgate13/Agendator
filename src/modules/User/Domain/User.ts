@@ -26,7 +26,7 @@ export class User extends Entity<IUser> {
     uid?: string,
   ): Either<InvalidEmailError | InvalidPassword, User> {
     const user = new User(UserProps, uid);
-
+    
     return right(user);
   }
 }
