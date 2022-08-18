@@ -21,9 +21,10 @@ model User {
 model Appointments {
   uid        String   @id @unique @default(uuid())
   user_uid   String
+  description String
   valor      Float
-  User       User     @relation(fields: [user_uid], references: [uid])
   date       String
   created_at DateTime
   update_at  DateTime
+  User       User     @relation(fields: [user_uid], references: [uid])
 }
