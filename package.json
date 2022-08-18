@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Projec in Nodejs With typescript",
+  "description": "Project in Nodejs With typescript",
   "main": "src/server.ts",
   "scripts": {
     "build": "tsc",
@@ -17,6 +17,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^27.4.1",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "eslint": "^8.21.0",
@@ -34,6 +35,9 @@
     "typescript": "^4.5.4"
   },
   "dependencies": {
-    "@prisma/client": "^4.1.1"
+    "@prisma/client": "^4.1.1",
+    "@types/bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
+    "uuid": "^8.3.2"
   }
 }
