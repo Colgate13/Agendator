@@ -1,6 +1,6 @@
-import { Email } from '@modules/User/Domain/Email';
-import { Password } from '@modules/User/Domain/Password';
-import { User } from '@modules/User/Domain/User';
+import { Email } from './modules/User/Domain/Email';
+import { Password } from './modules/User/Domain/Password';
+import { User } from './modules/User/Domain/User';
 
 
 const email = Email.create('gabreilbarros13@gmail.com');

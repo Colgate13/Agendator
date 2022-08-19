@@ -1,4 +1,4 @@
-import { Entity } from '@core/domain/Entity';
+import { Entity } from '../../../core/domain/Entity';
 import { Either, right } from '../../../core/logic/Either';
 import { InvalidEmailError } from './Errors/InvalidEmailError';
 import { InvalidPassword } from './Errors/invalidPasswordError';
