@@ -3,8 +3,18 @@ import { comparePassword, hashedPassword } from '../../../shared/Utils/PassCrypt
 import { InvalidPassword } from './Errors/invalidPasswordError';
 
 export class Password {
-  private readonly password: string;
-  private readonly hashed?: boolean;
+  private password: string;
+  private hashed?: boolean;
+
+  get value() {
+    return this.password;
+  }
+
+  public async setHashPassword() {
+    this.password = await this.getHashedValue();
+    this.hashed = true;
+    return true;
+  }
 
   private constructor(password: string, hashed: boolean) {
     this.password = password;
