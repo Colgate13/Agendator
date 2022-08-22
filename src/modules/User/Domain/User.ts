@@ -17,6 +17,11 @@ export class User extends Entity<IUser> {
     return this.props.email.value;
   }
 
+  get password(): string {
+    return this.props.password.value;
+  }
+
+
   private constructor(UserProps: IUser, uid?: string) {
     super(UserProps, uid);
   }
