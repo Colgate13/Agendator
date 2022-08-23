@@ -28,6 +28,7 @@ describe('Test User (Password, Email)', () => {
     expect(user.value).toBeInstanceOf(User);
     expect(user.value.email).toEqual('gabreilbarros13@gmail.com');
     expect(user.value.username).toEqual('Gabriel');
+    expect(user.value.password).toEqual(password.value.value);
   });
 
   it('should be a create user with UID set in create isRight', () => {

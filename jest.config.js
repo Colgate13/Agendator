@@ -1,12 +1,11 @@
-const { pathsToModuleNameMapper } = require('ts-jest')
-const { compilerOptions } = require('./tsconfig.json')
-
 module.exports = {
   clearMocks: true,
   coverageDirectory: 'coverage',
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/**/I*.ts',
+    '!src/**/mappers/**.ts',
+    '!src/**/repositories/**/*.ts',
     '!src/**/@types/*.ts',
     '!src/**/config/*.ts',
     '!src/infra/**/*.ts',

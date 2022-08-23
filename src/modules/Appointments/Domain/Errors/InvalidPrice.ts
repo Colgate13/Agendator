@@ -1,8 +1,8 @@
 import { CoreError } from '../../../../shared/Error/CoreError';
 
-export class InvalidValue extends CoreError {
+export class InvalidPrice extends CoreError {
   constructor() {
     super('This Valor less 0');
-    this.name = 'InvalidValue';
+    this.name = 'InvalidPrice';
   }
 }

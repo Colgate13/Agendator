@@ -1,8 +1,9 @@
-import { Value } from "./Value";
+import { Price } from "./Price";
 import { DateAppointments } from "./DateAppointments";
 
 export interface IAppointments {
   description: string;
-  valor: Value;
+  price: Price;
   date: DateAppointments
+  user_id: string;
 }
