@@ -1,7 +1,7 @@
 import { Entity } from '../../../core/domain/Entity';
 import { Either, right } from '../../../core/logic/Either';
 import { InvalidEmailError } from './Errors/InvalidEmailError';
-import { InvalidPassword } from './Errors/invalidPasswordError';
+import { InvalidPassword } from './Errors/InvalidPasswordError';
 import { IUser } from './IUser';
 
 export class User extends Entity<IUser> {
