@@ -12,7 +12,6 @@ describe('Test CreateUser UseCase', () => {
     createUser = new CreateUser(usersRepository)
   })
 
-
   it('should be a create User isRight', async () => {
 
     const user = await createUser.create({

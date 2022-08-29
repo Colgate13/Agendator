@@ -21,7 +21,7 @@ model User {
 
 model Appointments {
   uid        String   @id @unique @default(uuid())
-  status     Int 
+  status     Int      
   user_uid   String
   description String
   price      Float
