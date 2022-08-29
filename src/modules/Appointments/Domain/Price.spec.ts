@@ -6,7 +6,6 @@ describe('Test Appointments-Value', () => {
     const price = Price.create(80.66);
 
     if (price.isLeft()) {
-      console.log();
       throw Error(`Price invalid ${price.value.message}`);
     }
     

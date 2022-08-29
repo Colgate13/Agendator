@@ -4,6 +4,8 @@ module.exports = {
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/**/I*.ts',
+    '!src/**/useCases/Errors/*.ts',
+    '!src/**/useCases/**/*.ts',
     '!src/**/mappers/**.ts',
     '!src/**/repositories/**/*.ts',
     '!src/**/@types/*.ts',
@@ -11,6 +13,7 @@ module.exports = {
     '!src/infra/**/*.ts',
     '!src/core/**/*.ts',
     '!src/shared/Error/*',
+    '!src/shared/Config/**',
     '!src/server.ts'
   ],
   testMatch: [
@@ -20,7 +23,10 @@ module.exports = {
   coverageReporters: [
     'text-summary',
     'lcov',
-    'html'
+    'html',
+    'json',
+    'text',
+    'clover'
   ],
   preset: 'ts-jest',
 }
