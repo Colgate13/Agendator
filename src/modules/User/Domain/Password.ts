@@ -58,7 +58,6 @@ export class Password {
     hashed = false,
   ): Either<InvalidPassword, Password> {
     if (!this.validate(password)) {
-      console.log("------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>")
       return left(new InvalidPassword());
     }
 

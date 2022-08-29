@@ -1,6 +1,7 @@
 import { Either, left, right } from "core/logic/Either";
 import { IUsersRepository } from "modules/User/repositories/IUsersRepository";
 import { InvalidEmailOrPasswordError } from "./Errors/InvalidEmailOrPasswordError";
+import { JWT } from '../../Domain/jwt';
 
 interface IAuthUserRequest {
   email: string;
@@ -11,7 +12,7 @@ type IToken = {
   token: string;
 }
 
-type AuthenticatorAuthUser = Either< InvalidEmailOrPasswordError , IToken >
+type IAuthenticatorAuthUser = Either< InvalidEmailOrPasswordError , IToken >
 
 export class Authenticator {
 
@@ -21,7 +22,7 @@ export class Authenticator {
     this.userRepository = UserRepository;
   }
 
-  async authUser({ email, password }: IAuthUserRequest): Promise<AuthenticatorAuthUser> {
+  async authUser({ email, password }: IAuthUserRequest): Promise<IAuthenticatorAuthUser> {
     const userTryAuth = await this.userRepository.findByEmail(email);
 
     if (!userTryAuth) {
@@ -30,9 +31,7 @@ export class Authenticator {
 
     if (await userTryAuth.props.password.comparePassword(password)) {
 
-      return right({
-        token: 'mama'
-      })
+      return right(JWT.signUser(userTryAuth));
 
     }
 

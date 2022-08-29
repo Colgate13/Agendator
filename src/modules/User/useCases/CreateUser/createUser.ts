@@ -36,9 +36,8 @@ export class CreateUser {
       return left(emailOrError.value);    
     }
     
-    console.log(passwordOrError.value)
     if (passwordOrError.isLeft()) {
-       return left(passwordOrError.value);
+      return left(passwordOrError.value);
     }
 
     await passwordOrError.value.setHashPassword()
