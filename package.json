@@ -1,7 +1,7 @@
 {
-  "name": "backend",
+  "name": "agendator",
   "version": "1.0.0",
-  "description": "Project in Nodejs With typescript",
+  "description": "Agendator backend project",
   "main": "src/server.ts",
   "scripts": {
     "build": "tsc",
@@ -10,7 +10,14 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watchAll --maxWorkers=1",
-    "test:clear": "jest --clearCache"
+    "test:clear": "jest --clearCache",
+    "prisma:dev": "npx prisma migrate dev",
+    "prisma:reset": "npx prisma migrate reset",
+    "prisma:createOnly": "npx prisma migrate dev --create-only",
+    "prisma:deploy": "npx prisma migrate deploy"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.mjs"
   },
   "keywords": [],
   "author": "",
