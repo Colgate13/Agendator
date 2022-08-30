@@ -1,25 +1,20 @@
-import { Email } from './modules/User/Domain/Email';
-import { Password } from './modules/User/Domain/Password';
-import { User } from './modules/User/Domain/User';
+import dotenv from 'dotenv';
+import ServerHttp from './infra/http/server';
 
+dotenv.config();
 
-const email = Email.create('gabreilbarros13@gmail.com');
-const password = Password.create('84656505');
+process.title = 'Agendator - server';
 
-if (email.isLeft()) {
-  throw Error('Email invalid');
-}
+const serverHttp = new ServerHttp(process.env.PORT || '5000', false);
 
-if (password.isLeft()) {
-  throw Error('Password invalid');
-}
+serverHttp.init();
 
-const user = User.create({
-  email: email.value,
-  password: password.value,
-  username: 'Gabriel',
+process.on('SIGTERM', () => {
+  console.log('> Server ending after close all connections - ', new Date().toISOString());
+  serverHttp.close(() => process.exit());
 });
 
-console.log(user)
-
-console.log('Project com NODE e Typescript configuration');
+process.on('SIGINT', () => {
+  console.log('> Server ending now! - ', new Date().toISOString());
+  process.exit();
+});
