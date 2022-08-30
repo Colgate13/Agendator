@@ -2,9 +2,12 @@ import { Entity } from '../../../core/domain/Entity';
 import { Either, right } from '../../../core/logic/Either';
 import { InvalidEmailError } from './Errors/InvalidEmailError';
 import { InvalidPassword } from './Errors/InvalidPasswordError';
-import { IUser } from './IUser';
+import { IUser, IUserView } from './IUser';
+
+
 
 export class User extends Entity<IUser> {
+
   get uid(): string {
     return this._id;
   }
@@ -21,6 +24,13 @@ export class User extends Entity<IUser> {
     return this.props.password.value;
   }
 
+  get user(): IUserView {
+    return {
+      id: this.uid,
+      email: this.email,
+      username: this.username
+    }
+  }
 
   private constructor(UserProps: IUser, uid?: string) {
     super(UserProps, uid);
