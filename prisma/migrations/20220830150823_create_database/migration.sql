@@ -31,9 +31,6 @@ CREATE TABLE "AppointmentStatus" (
 CREATE UNIQUE INDEX "User_uid_key" ON "User"("uid");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
-
--- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
