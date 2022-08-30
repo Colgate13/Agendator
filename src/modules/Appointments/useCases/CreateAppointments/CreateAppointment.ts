@@ -48,7 +48,7 @@ export class CreateAppointment {
       return left(new InvalidAppoitmentDatas());
     }
 
-    await this.appointmentRepository.save(appointment.value);
+    await this.appointmentRepository.create(appointment.value);
 
     return right(appointment.value);
 

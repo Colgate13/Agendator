@@ -15,4 +15,8 @@ export class InMemoryAppointmentsRepository implements IAppointmentsRepository {
   async create(appointment: Appointments): Promise<void> {
     this.items.push(appointment)
   }
+
+  async listByUser(user_id: string): Promise<Appointments[]> {
+    return this.items
+  }
 }

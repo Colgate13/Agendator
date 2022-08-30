@@ -1,4 +1,4 @@
-import { UserMapper } from 'modules/User/mappers/UserMapper'
+import { UserMapper } from '../../mappers/UserMapper'
 import { prisma } from '../../../../infra/prisma/client'
 import { User } from '../../Domain/User'
 import { IUsersRepository } from '../IUsersRepository'
