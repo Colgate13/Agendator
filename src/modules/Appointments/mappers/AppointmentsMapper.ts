@@ -5,7 +5,7 @@ import { DateAppointments } from '../Domain/DateAppointments'
 import { Price } from '../Domain/Price'
 
 export class AppointmentMapper {
-  static toDomain(raw: PersistenceAppointment): Appointments | null {
+  static toDomain(raw: PersistenceAppointment): Appointments {
     const dateAppointments = DateAppointments.create(raw.date)
     const price = Price.create(raw.price)
 
@@ -30,7 +30,8 @@ export class AppointmentMapper {
       return appointment.value
     }
 
-    return null
+    throw new Error('Appointment Invalid to Mapper.')
+    
   }
 
   static async toPersistence(appointments: Appointments) {

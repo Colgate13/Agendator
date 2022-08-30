@@ -1,6 +1,7 @@
 import { Appointments } from '../Domain/Appointments'
 
 export interface IAppointmentsRepository {
-  save(user: Appointments): Promise<void>
-  create(user: Appointments): Promise<void>
+  save(appointment: Appointments): Promise<void>
+  create(appointment: Appointments): Promise<void>
+  listByUser(user_id: string): Promise<Appointments[]>
 }

@@ -5,7 +5,7 @@ module.exports = {
     'src/**/*.ts',
     '!src/**/I*.ts',
     '!src/**/useCases/Errors/*.ts',
-    '!src/**/useCases/**/*.ts',
+    '!src/**/useCases/*/Errors/*.ts',
     '!src/**/mappers/**.ts',
     '!src/**/repositories/**/*.ts',
     '!src/**/@types/*.ts',
