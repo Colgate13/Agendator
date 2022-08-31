@@ -8,7 +8,6 @@ import CreateUserController from '../../../modules/User/useCases/CreateUser/infr
 const createUserController = new CreateUserController()
 
 const users = Router();
-console.log("123123123")
 
 users.post('/', createUserController.execute);
 

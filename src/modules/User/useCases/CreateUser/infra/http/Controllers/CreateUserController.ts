@@ -2,51 +2,59 @@ import { Response, Request } from 'express';
 import { PrismaUsersRepository } from '../../../../../repositories/prisma/UsersRepository';
 import { AppError } from '../../../../../../../shared/Error/AppError';
 import { CreateUser, ICreateUser } from '../../../createUser';
+import { Authenticator } from '../../../../AuthenticateUser/AuthenticateUser';
 
 export default class CreateUserController {
-
-  private createUsersService: CreateUser;
-
-  constructor(CreateUserProps = CreateUser, UserRepository = PrismaUsersRepository) {
-    this.createUsersService = new CreateUserProps(new UserRepository)
-  }
 
   public async execute(
     request: Request,
     response: Response,
   ) {
-    console.log("here123")
-
+    
+    const createUsersService = new CreateUser(new PrismaUsersRepository());
     const bodyParams: ICreateUser = request.body;
     
     if (!bodyParams) {
-      return new AppError(`Your request Body is invalid`);
+      throw new AppError(`Your request Body is invalid`);
     }
-    if (bodyParams.email) {
-      return new AppError(`Email is proprety required ${bodyParams.email}`);
+    if (!bodyParams.email) {
+      throw new AppError(`Email is proprety required ${bodyParams.email}`);
     }
-    if (bodyParams.password) {
-      return new AppError(`Password is proprety required ${bodyParams.password}`);
+    if (!bodyParams.password) {
+      throw new AppError(`Password is proprety required ${bodyParams.password}`);
     }
-    if (bodyParams.username) {
-      return new AppError(`Username is proprety required ${bodyParams.username}`);
+    if (!bodyParams.username) {
+      throw new AppError(`Username is proprety required ${bodyParams.username}`);
     }
 
     const { email, password, username } = bodyParams;
 
-    const result = await this.createUsersService.create({
+    const result = await createUsersService.create({
       email,
       password,
       username
     });
 
-    console.log("here")
-
     if (result.isLeft()) {
-      return new AppError(`Username is proprety required ${bodyParams.username}`);
+      throw new AppError(`Username is proprety required ${bodyParams.username}`);
     }
 
-    return response.json(result.value.user);
+    request.debug(`User created -> Id = ${result.value.uid}`)
+    request.debug(`Logging in User -> Id = ${result.value.uid}`)
+
+    const userAuth = await new Authenticator(new PrismaUsersRepository()).authUser({
+      email: email,
+      password: password
+    });
+
+    if (userAuth.isLeft()) {
+      return response.json(result.value.user);
+    }
+
+    return response.json({
+      ...result.value.user,
+      token: userAuth.value.token
+    });
 
   }
 }
