@@ -1,11 +1,11 @@
-import { Either, left, right } from "../../../../core/logic/Either";
-import { Email } from "../../Domain/Email";
-import { InvalidEmailError } from "../../Domain/Errors/InvalidEmailError";
-import { InvalidPassword } from "../../Domain/Errors/InvalidPasswordError";
-import { Password } from "../../Domain/Password";
-import { User } from "../../Domain/User";
-import { IUsersRepository } from "../../repositories/IUsersRepository";
-import { AccountAlreadyExistsError } from './Errors/AccountAlreadyExistsError';
+import { Either, left, right } from '../../../../core/logic/Either';
+import { Email } from '../../Domain/Email';
+import { InvalidEmailError } from '../../Domain/suporte/InvalidEmailError';
+import { InvalidPassword } from '../../Domain/suporte/invalidPasswordError';
+import { Password } from '../../Domain/Password';
+import { User } from '../../Domain/User';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
+import { AccountAlreadyExistsError } from './suporte/AccountAlreadyExistsError';
 
 export interface ICreateUser {
   username: string;
@@ -16,7 +16,6 @@ export interface ICreateUser {
 type CreateUserReturn = Either<InvalidEmailError | InvalidPassword, User>;
 
 export class CreateUser {
-
   protected userRepository: IUsersRepository;
 
   constructor(UserRepository: IUsersRepository) {
@@ -26,27 +25,26 @@ export class CreateUser {
   async create({
     email,
     password,
-    username
+    username,
   }: ICreateUser): Promise<CreateUserReturn> {
-
     const emailOrError = Email.create(email);
     const passwordOrError = Password.create(password);
 
     if (emailOrError.isLeft()) {
-      return left(emailOrError.value);    
+      return left(emailOrError.value);
     }
-    
+
     if (passwordOrError.isLeft()) {
       return left(passwordOrError.value);
     }
 
-    await passwordOrError.value.setHashPassword()
+    await passwordOrError.value.setHashPassword();
 
     const userOrError = User.create({
       email: emailOrError.value,
       password: passwordOrError.value,
-      username
-    })
+      username,
+    });
 
     if (userOrError.isLeft()) {
       return left(userOrError.value);
@@ -57,13 +55,11 @@ export class CreateUser {
     const userAlredyExists = await this.userRepository.exists(user.email);
 
     if (userAlredyExists) {
-      return left(new AccountAlreadyExistsError(user.email))
+      return left(new AccountAlreadyExistsError(user.email));
     }
 
     await this.userRepository.create(user);
 
     return right(user);
-
   }
-
 }

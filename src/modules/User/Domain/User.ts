@@ -1,13 +1,10 @@
 import { Entity } from '../../../core/domain/Entity';
 import { Either, right } from '../../../core/logic/Either';
-import { InvalidEmailError } from './Errors/InvalidEmailError';
-import { InvalidPassword } from './Errors/InvalidPasswordError';
+import { InvalidEmailError } from './suporte/InvalidEmailError';
+import { InvalidPassword } from './suporte/invalidPasswordError';
 import { IUser, IUserView } from './IUser';
 
-
-
 export class User extends Entity<IUser> {
-
   get uid(): string {
     return this._id;
   }
@@ -28,8 +25,8 @@ export class User extends Entity<IUser> {
     return {
       id: this.uid,
       email: this.email,
-      username: this.username
-    }
+      username: this.username,
+    };
   }
 
   private constructor(UserProps: IUser, uid?: string) {
@@ -41,7 +38,7 @@ export class User extends Entity<IUser> {
     uid?: string,
   ): Either<InvalidEmailError | InvalidPassword, User> {
     const user = new User(UserProps, uid);
-    
+
     return right(user);
   }
 }

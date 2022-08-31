@@ -1,8 +1,8 @@
-import { sign, verify } from 'jsonwebtoken'
+import { sign, verify } from 'jsonwebtoken';
 import jwtConfig from '../../../shared/Config/jwt/auth';
 import { Either, left, right } from '../../../core/logic/Either';
-import { InvalidJWTTokenError } from './Errors/InvalidJWTTokenError';
-import { User } from './User'
+import { InvalidJWTTokenError } from './suporte/InvalidJWTTokenError';
+import { User } from './User';
 
 interface JWTData {
   userId: string
@@ -15,12 +15,12 @@ export interface JWTTokenPayload {
 }
 
 export class JWT {
-  public readonly userId: string
-  public readonly token: string
+  public readonly userId: string;
+  public readonly token: string;
 
   private constructor({ userId, token }: JWTData) {
-    this.userId = userId
-    this.token = token
+    this.userId = userId;
+    this.token = token;
   }
 
   // public getUserId(): Either<InvalidJWTTokenError, string> {
@@ -36,37 +36,37 @@ export class JWT {
   // }
 
   static decodeToken(
-    token: string
+    token: string,
   ): Either<InvalidJWTTokenError, JWTTokenPayload> {
     try {
-      const decoded = verify(token, jwtConfig.jwt.secret) as JWTTokenPayload
+      const decoded = verify(token, jwtConfig.jwt.secret) as JWTTokenPayload;
 
-      return right(decoded)
+      return right(decoded);
     } catch (err) {
-      return left(new InvalidJWTTokenError())
+      return left(new InvalidJWTTokenError());
     }
   }
 
   static createFromJWT(token: string): Either<InvalidJWTTokenError, JWT> {
-    const jwtPayloadOrError = this.decodeToken(token)
+    const jwtPayloadOrError = this.decodeToken(token);
 
     if (jwtPayloadOrError.isLeft()) {
-      return left(jwtPayloadOrError.value)
+      return left(jwtPayloadOrError.value);
     }
 
-    const jwt = new JWT({ token, userId: jwtPayloadOrError.value.sub })
+    const jwt = new JWT({ token, userId: jwtPayloadOrError.value.sub });
 
-    return right(jwt)
+    return right(jwt);
   }
 
   static signUser(user: User): JWT {
     const token = sign({}, jwtConfig.jwt.secret, {
       subject: user.uid,
       expiresIn: jwtConfig.jwt.expiresIn,
-    })
+    });
 
-    const jwt = new JWT({ userId: user.uid, token })
+    const jwt = new JWT({ userId: user.uid, token });
 
-    return jwt
+    return jwt;
   }
 }
