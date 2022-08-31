@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es2016",
     "module": "commonjs",
     "rootDir": "./src",
-    "baseUrl": "./src",
     "resolveJsonModule": true,
     "outDir": "./dist",
     "esModuleInterop": true,
