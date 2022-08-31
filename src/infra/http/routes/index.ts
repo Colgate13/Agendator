@@ -3,15 +3,13 @@ import {
 } from 'express';
 import 'express-async-errors';
 
+import users from './users.routes';
+
 export const routesCreator = Router();
 
 const routes = Router();
 
-routes.get('/oi', (request: Request, response: Response) => {
-  response.write('dasdasd');
-  response.send();
-});
-
+routes.use('/users', users);
 routes.use('/', (request: Request, response: Response) => {
   response.send({
     message: 'Welcome',

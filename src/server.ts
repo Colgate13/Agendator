@@ -5,7 +5,7 @@ dotenv.config();
 
 process.title = 'Agendator - server';
 
-const serverHttp = new ServerHttp(process.env.PORT || '5000', false);
+const serverHttp = new ServerHttp(process.env.PORT || '5000', !Boolean(process.env.MULTPROCESS));
 
 serverHttp.init();
 

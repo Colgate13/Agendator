@@ -8,12 +8,12 @@ import { AppError } from '../../shared/Error/AppError';
 import Debug from 'debug';
 
 class ServerHttp {
-  public debug = Debug("http");
+  public debug = Debug("app:infra:http");
   protected app;
-  public multiProcess = true;
+  public multiProcess;
   protected server;
 
-  constructor(port: number | string, multiProcess = true) {
+  constructor(port: number | string, multiProcess: boolean) {
     this.multiProcess = multiProcess;
     this.app = express();
     this.server = http.createServer(this.app);
@@ -28,6 +28,7 @@ class ServerHttp {
     if (cluster.isPrimary && this.multiProcess) {
       ProcessController.PrimaryProcess();
     } else {
+      ProcessController.SetNameWorker();
       this.middlerwares();
       this.routes();
       this.middlewareHandlerErrors();

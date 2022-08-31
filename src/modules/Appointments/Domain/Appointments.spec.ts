@@ -21,7 +21,6 @@ describe('Test Appointments (Value, DateAppointments)', () => {
     }
 
     if (value.isLeft()) {
-      console.log();
       throw Error(`value invalid ${value.value.message}`);
     }
 

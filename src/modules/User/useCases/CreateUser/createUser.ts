@@ -7,7 +7,7 @@ import { User } from "../../Domain/User";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 import { AccountAlreadyExistsError } from './Errors/AccountAlreadyExistsError';
 
-interface ICreateUser {
+export interface ICreateUser {
   username: string;
   email: string;
   password: string;

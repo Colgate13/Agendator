@@ -6,3 +6,9 @@ export interface IUser {
   email: Email;
   password: Password;
 }
+
+export interface IUserView {
+  id: string;
+  username: string;
+  email: string;
+}
