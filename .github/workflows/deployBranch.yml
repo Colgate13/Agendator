@@ -44,10 +44,10 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         PORT: ${{ secrets.PORT }}
         script: |
-         pwd >> log.txt
+         export NVM_DIR=~/.nvm
+         source ~/.nvm/nvm.sh
          npm -v > logVersion.txt
          cd /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
-         pwd >> log.txt
-         npm run build >> log.txt
-         npm run prisma:deploy >> log.txt
+         npm run build
+         npm run prisma:deploy
          npm run start
