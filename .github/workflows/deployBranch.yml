@@ -25,6 +25,7 @@ jobs:
           PORT: ${{ secrets.PORT }}
           source: '.'
           target: '/var/www/agendator/${{ github.ref_name }}/agendator.velloware.com'
+          overwrite: true
       - name: Executing remote command
         uses: appleboy/ssh-action@master
         with:
@@ -42,6 +43,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           PORT: ${{ secrets.PORT }}
           script: |
+            exec bash
             cd /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
