@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy - Production
 
 on:
   push:
@@ -20,6 +20,22 @@ jobs:
     #     password: ${{ secrets.PASSWORD }}
     #     port: ${{ secrets.PORT }}
     #     script: rm -r /var/www/agendator.velloware.com/*
+    
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Set up Node
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Install dependencies
+    - uses: bahmutov/npm-install@v1
+
+    - name: Run Build
+      run: npm run build
 
     - uses: actions/checkout@master
     - name: Copy repository contents via scp
@@ -39,4 +55,8 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         PORT: ${{ secrets.PORT }}
-        script: ls
+        script: |
+         cd /var/www/agendator.velloware.com
+         npm run build
+         npm run prisma:deploy
+         npm run start

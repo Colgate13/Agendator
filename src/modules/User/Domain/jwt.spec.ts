@@ -2,7 +2,7 @@ import { JWT, JWTTokenPayload } from './jwt';
 import { Email } from './Email';
 import { Password } from './Password';
 import { User } from './User';
-import { InvalidJWTTokenError } from './errors/InvalidJWTTokenError';
+import { InvalidJWTTokenError } from './Errors/InvalidJWTTokenError';
 
 const email = Email.create('johndoe@example.com').value as Email;
 const password = Password.create('123456').value as Password;

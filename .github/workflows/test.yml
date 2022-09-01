@@ -1,6 +1,6 @@
-name: Test
+name: Test - Aplication
 
-on: ['push', 'pull_request']
+on: 'pull_request'
 
 jobs:
   code:

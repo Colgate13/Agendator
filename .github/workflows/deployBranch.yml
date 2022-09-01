@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy - Environment for development 
 
 on: pull_request
 
@@ -42,5 +42,9 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        script: cd /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com && npm ci i && npm run build && npm run start
+        PORT: ${{ secrets.PORT }}
+        script: |
+         cd /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
+         npm run build
+         npm run prisma:deploy
+         npm run start
