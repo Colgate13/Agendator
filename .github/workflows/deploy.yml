@@ -7,56 +7,58 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
+      # - name: Cleaing Folder /var/www/agendator.velloware.com
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.HOST }}
+      #     username: ${{ secrets.USERNAME }}
+      #     password: ${{ secrets.PASSWORD }}
+      #     port: ${{ secrets.PORT }}
+      #     script: rm -r /var/www/agendator.velloware.com/*
 
-    # - name: Cleaing Folder /var/www/agendator.velloware.com
-    #   uses: appleboy/ssh-action@master
-    #   with:
-    #     host: ${{ secrets.HOST }}
-    #     username: ${{ secrets.USERNAME }}
-    #     password: ${{ secrets.PASSWORD }}
-    #     port: ${{ secrets.PORT }}
-    #     script: rm -r /var/www/agendator.velloware.com/*
-    
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-    - name: Set up Node
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 16
+      - name: Set up Node
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
 
-    - name: Install dependencies
-    - uses: bahmutov/npm-install@v1
+      - name: Install dependencies
+      - uses: bahmutov/npm-install@v1
 
-    - name: Run Build
-      run: npm run build
+      - name: Run Build
+        run: npm run build
 
-    - uses: actions/checkout@master
-    - name: Copy repository contents via scp
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        PORT: ${{ secrets.PORT }}
-        source: "."
-        target: "/var/www/agendator.velloware.com"
+      - uses: actions/checkout@master
+      - name: Copy repository contents via scp
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          PORT: ${{ secrets.PORT }}
+          source: '.'
+          target: '/var/www/agendator.velloware.com'
 
-    - name: Executing remote command
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        PORT: ${{ secrets.PORT }}
-        script: |
-         cd /var/www/agendator.velloware.com
-         npm run build
-         npm run prisma:deploy
-         npm run start
+      - name: Executing remote command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          PORT: ${{ secrets.PORT }}
+          script: |
+            exec bash
+            cd /var/www/agendator.velloware.com
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            npm run build
+            npm run prisma:deploy
+            pm2 link ${{ secrets.PM2A }} ${{ secrets.PM2B }}
+            MULTPROCESS=true pm2 start dist/server.js

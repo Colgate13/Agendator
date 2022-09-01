@@ -47,7 +47,7 @@ jobs:
             cd /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            sudo -s
             npm run build
             npm run prisma:deploy
-            npm run start
+            pm2 link ${{ secrets.PM2ATEST }} ${{ secrets.PM2BTEST }}
+            MULTPROCESS=false DEBUG=app pm2 start dist/server.js
