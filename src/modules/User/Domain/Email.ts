@@ -1,5 +1,5 @@
 import { Either, left, right } from '../../../core/logic/Either';
-import { InvalidEmailError } from './suporte/InvalidEmailError';
+import { InvalidEmailError } from './errors/InvalidEmailError';
 
 export class Email {
   private readonly email: string;

@@ -1,6 +1,6 @@
 import { Either, left, right } from "../../../../core/logic/Either";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
-import { InvalidEmailOrPasswordError } from "./Errors/InvalidEmailOrPasswordError";
+import { InvalidEmailOrPasswordError } from "./errors/InvalidEmailOrPasswordError";
 import { JWT } from '../../Domain/jwt';
 
 interface IAuthUserRequest {

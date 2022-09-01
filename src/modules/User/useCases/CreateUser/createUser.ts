@@ -1,11 +1,11 @@
 import { Either, left, right } from '../../../../core/logic/Either';
 import { Email } from '../../Domain/Email';
-import { InvalidEmailError } from '../../Domain/suporte/InvalidEmailError';
-import { InvalidPassword } from '../../Domain/suporte/invalidPasswordError';
+import { InvalidEmailError } from '../../Domain/errors/InvalidEmailError';
+import { InvalidPassword } from '../../Domain/errors/invalidPasswordError';
 import { Password } from '../../Domain/Password';
 import { User } from '../../Domain/User';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
-import { AccountAlreadyExistsError } from './suporte/AccountAlreadyExistsError';
+import { AccountAlreadyExistsError } from './errors/AccountAlreadyExistsError';
 
 export interface ICreateUser {
   username: string;

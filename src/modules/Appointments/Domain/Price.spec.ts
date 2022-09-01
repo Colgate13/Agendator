@@ -1,5 +1,5 @@
 import { Price } from './Price';
-import { InvalidPrice } from './Errors/InvalidPrice';
+import { InvalidPrice } from './errors/InvalidPrice';
 
 describe('Test Appointments-Value', () => {
   it('should be a create Value isRight', () => {

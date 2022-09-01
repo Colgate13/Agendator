@@ -1,8 +1,8 @@
 import { Entity } from "../../../core/domain/Entity";
 import { Either, right } from "../../../core/logic/Either";
 import { IAppointments } from "./IAppointments";
-import { InvalidPrice } from './Errors/InvalidPrice'
-import { InvalidDate } from './Errors/InvalidDate'
+import { InvalidPrice } from './errors/InvalidPrice'
+import { InvalidDate } from './errors/InvalidDate'
 
 export class Appointments extends Entity<IAppointments> {
 

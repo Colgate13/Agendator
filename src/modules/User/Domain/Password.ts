@@ -1,6 +1,6 @@
 import { Either, left, right } from '../../../core/logic/Either';
 import { comparePassword, hashedPassword } from '../../../shared/Utils/PassCrypt';
-import { InvalidPassword } from './suporte/invalidPasswordError';
+import { InvalidPassword } from './errors/invalidPasswordError';
 
 export class Password {
   private password: string;
