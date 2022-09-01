@@ -4,8 +4,8 @@ module.exports = {
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/**/I*.ts',
-    '!src/**/useCases/Errors/*.ts',
-    '!src/**/useCases/*/Errors/*.ts',
+    '!src/**/useCases/errors/*.ts',
+    '!src/**/useCases/*/errors/*.ts',
     '!src/**/mappers/**.ts',
     '!src/**/repositories/**/*.ts',
     '!src/**/@types/*.ts',

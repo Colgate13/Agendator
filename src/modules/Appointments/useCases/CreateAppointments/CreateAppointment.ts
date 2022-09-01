@@ -3,7 +3,7 @@ import { Appointments } from '../../Domain/Appointments';
 import { DateAppointments } from '../../Domain/DateAppointments';
 import { Price } from '../../Domain/Price';
 
-import { InvalidAppoitmentDatas } from './Errors/InvalidAppoitmentDatas';
+import { InvalidAppoitmentDatas } from './errors/InvalidAppoitmentDatas';
 import { IAppointmentsRepository } from '../../repositories/IAppointmentsRepository';
 
 interface IAppointmentCreate {
