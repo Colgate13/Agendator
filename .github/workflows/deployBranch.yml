@@ -44,9 +44,10 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         PORT: ${{ secrets.PORT }}
         script: |
-         echo pwd >> log.txt
+         pwd >> log.txt
+         npm -v > logVersion.txt
          cd /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
-         echo pwd >> log.txt
-         npm run build  >> log.txt
-         npm run prisma:deploy  >> log.txt
+         pwd >> log.txt
+         npm run build >> log.txt
+         npm run prisma:deploy >> log.txt
          npm run start
