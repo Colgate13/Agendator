@@ -1,6 +1,6 @@
 import { Either, left, right } from '../../../core/logic/Either';
 import { startOfHour, isBefore, getHours, format } from 'date-fns';
-import { InvalidDate } from './errors/InvalidDate';
+import { InvalidDate } from './Errors/InvalidDate';
 
 export class DateAppointments {
   private date: Date;

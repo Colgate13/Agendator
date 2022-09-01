@@ -1,7 +1,7 @@
 import { sign, verify } from 'jsonwebtoken';
 import jwtConfig from '../../../shared/Config/jwt/auth';
 import { Either, left, right } from '../../../core/logic/Either';
-import { InvalidJWTTokenError } from './errors/InvalidJWTTokenError';
+import { InvalidJWTTokenError } from './Errors/InvalidJWTTokenError';
 import { User } from './User';
 
 interface JWTData {
