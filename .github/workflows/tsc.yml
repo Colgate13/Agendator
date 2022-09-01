@@ -1,6 +1,6 @@
 name: Test Typescript checking
 
-on: pull_request
+on: 'pull_request'
 
 jobs:
   code:
