@@ -1,5 +1,5 @@
 import { Either, left, right } from '../../../core/logic/Either';
-import { InvalidPrice } from './errors/InvalidPrice';
+import { InvalidPrice } from './Errors/InvalidPrice';
 
 export class Price {
   public price: number;
