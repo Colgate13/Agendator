@@ -44,7 +44,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           PORT: ${{ secrets.PORT }}
           source: '.'
-          target: '/var/www/agendator.velloware.com'
+          target: '/var/www/agendator-backend.velloware.com'
 
       - name: Executing remote command
         uses: appleboy/ssh-action@master
@@ -54,8 +54,8 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           PORT: ${{ secrets.PORT }}s
           script: |
-            sudo chown -R $USER /var/www/agendator.velloware.com
-            cd /var/www/agendator.velloware.com
+            sudo chown -R $USER /var/www/agendator-backend.velloware.com
+            cd /var/www/agendator-backend.velloware.com
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             npm ci i
@@ -63,3 +63,4 @@ jobs:
             npm run prisma:deploy
             pm2 link ${{ secrets.PM2ATEST }} ${{ secrets.PM2BTEST }}
             MULTPROCESS=true pm2 start ecosystem.config.js
+            curl --request POST --url https://dash.velloware.com/api/notification --header 'Content-Type: application/json' --data '{"message": "\n✔ Deploy Agendator Backend-${{ github.ref_name }} on agendator-backend.velloware.com 📣\n"}'
