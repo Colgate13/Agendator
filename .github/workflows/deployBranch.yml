@@ -43,6 +43,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           PORT: ${{ secrets.PORT }}
           script: |
+            sudo chown -R $USER /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
             cd /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
