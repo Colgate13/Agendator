@@ -43,5 +43,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           PORT: ${{ secrets.PORT }}
           script: |
-            sh /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
+            cd /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
             sh autostart.sh
