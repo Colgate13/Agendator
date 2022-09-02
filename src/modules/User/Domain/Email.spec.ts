@@ -1,5 +1,5 @@
 import { Email } from './Email';
-import { InvalidEmailError } from './errors/InvalidEmailError';
+import { InvalidEmailError } from './Errors/InvalidEmailError';
 
 describe('Test Email', () => {
   it('should be a create Email isRight', () => {

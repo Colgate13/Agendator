@@ -1,4 +1,4 @@
-import { InvalidPassword } from './errors/invalidPasswordError';
+import { InvalidPassword } from './Errors/invalidPasswordError';
 import { Password } from './Password';
 import { comparePassword, hashedPassword } from '../../../shared/Utils/PassCrypt';
 

@@ -1,5 +1,5 @@
 import { DateAppointments } from './DateAppointments';
-import { InvalidDate } from './errors/InvalidDate';
+import { InvalidDate } from './Errors/InvalidDate';
 
 const dateMocks = [
   "Thu Oct 20 2022 00:00:00 GMT-0300 (Horário Padrão de Brasília)",
