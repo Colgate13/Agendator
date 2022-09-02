@@ -52,13 +52,14 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          PORT: ${{ secrets.PORT }}
+          PORT: ${{ secrets.PORT }}s
           script: |
-            exec bash
+            sudo chown -R $USER /var/www/agendator.velloware.com
             cd /var/www/agendator.velloware.com
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            npm ci i
             npm run build
             npm run prisma:deploy
-            pm2 link ${{ secrets.PM2A }} ${{ secrets.PM2B }}
-            MULTPROCESS=true pm2 start dist/server.js
+            pm2 link ${{ secrets.PM2ATEST }} ${{ secrets.PM2BTEST }}
+            MULTPROCESS=true pm2 start ecosystem.config.js

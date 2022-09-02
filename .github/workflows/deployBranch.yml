@@ -51,4 +51,5 @@ jobs:
             npm run build
             npm run prisma:deploy
             pm2 link ${{ secrets.PM2ATEST }} ${{ secrets.PM2BTEST }}
-            MULTPROCESS=false DEBUG=app pm2 start dist/server.js
+            MULTPROCESS=false DEBUG=app pm2 start ecosystem.config.development.js
+            curl --request POST --url https://dash.velloware.com/api/notification --header 'Content-Type: application/json' --data '{"message": "✔ Create Environment 📣\n ambient for ${{ github.ref_name }}"}'
