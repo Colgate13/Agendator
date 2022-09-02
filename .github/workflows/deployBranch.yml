@@ -43,11 +43,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           PORT: ${{ secrets.PORT }}
           script: |
-            exec bash
-            cd /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            npm run build
-            npm run prisma:deploy
-            pm2 link ${{ secrets.PM2ATEST }} ${{ secrets.PM2BTEST }}
-            MULTPROCESS=false DEBUG=app pm2 start dist/server.js
+            sh /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
+            sh autostart.sh
