@@ -1,21 +1,24 @@
-name: Test Typescript checking
+name: Type checking
 
-on: 'pull_request'
+on: pull_request
 
 jobs:
   code:
-    name: Typescript checking on code
+    name: Type checking code
     runs-on: ubuntu-latest
-    container: node:lts
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
+      - name: Set up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
 
       - name: Run TypeScript
-        run: npm tsc
+        run: yarn tsc
