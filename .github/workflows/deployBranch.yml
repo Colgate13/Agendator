@@ -11,4 +11,4 @@ jobs:
         uses: JamesIves/fetch-api-data-action@v2
         with:
           endpoint: https://dash.velloware.com/api/notification
-          configuration: '{ "method": "POST", "message": "✔ Agendator-backend\nCreate Pull request for ${{ github.ref_name }}" }'
+          configuration: '{ "method": "POST", "body": {"message": "✔ Agendator-backend\nCreate Pull request for ${{ github.ref_name }}"} }'
