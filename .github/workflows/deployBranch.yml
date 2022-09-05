@@ -1,55 +1,14 @@
-name: Deploy - Environment for development
+name: Notify - Environment for development
 
 on: 'pull_request'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
-      # - name: Cleaing Folder /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.HOST }}
-      #     username: ${{ secrets.USERNAME }}
-      #     password: ${{ secrets.PASSWORD }}
-      #     port: ${{ secrets.PORT }}
-      #     script: rm -r /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com/*
-      - uses: actions/checkout@master
-      - name: Copy repository contents via scp
-        uses: appleboy/scp-action@master
+      - name: Fetch API Data 📦
+        uses: JamesIves/fetch-api-data-action@releases/v1
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          PORT: ${{ secrets.PORT }}
-          source: '.'
-          target: '/var/www/agendator/${{ github.ref_name }}/agendator.velloware.com'
-          overwrite: true
-      - name: Executing remote command
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          PORT: ${{ secrets.PORT }}
-          script: ls
-
-      - name: Running the project branch ${{ github.ref_name }} in /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          PORT: ${{ secrets.PORT }}
-          script: |
-            sudo chown -R $USER /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
-            cd /var/www/agendator/${{ github.ref_name }}/agendator.velloware.com
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            npm ci i
-            npm run build
-            npm run prisma:deploy
-            pm2 link ${{ secrets.PM2ATEST }} ${{ secrets.PM2BTEST }}
-            MULTPROCESS=false DEBUG=app pm2 start ecosystem.config.development.js
-            curl --request POST --url https://dash.velloware.com/api/notification --header 'Content-Type: application/json' --data '{"message": "✔ Create Environment 📣\n ambient for ${{ github.ref_name }}"}'
+          ENDPOINT: https://dash.velloware.com/api/notification
+          CONFIGURATION: '{ "method": "POST", "headers": { "Content-Type": "application/json" }, "body": {"message": "\n Create Pull Request - ⛑${{ github.ref_name }}📣📢 on Agendator Backend\n on Push(Vello-1-server) (acess: https://github.com/velloware/Agendator/pull/${{ github.ref_name }})"} }'
