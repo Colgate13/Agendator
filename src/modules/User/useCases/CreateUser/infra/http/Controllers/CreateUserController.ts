@@ -5,17 +5,15 @@ import { CreateUser, ICreateUser } from '../../../createUser';
 import { Authenticator } from '../../../../AuthenticateUser/AuthenticateUser';
 
 export default class CreateUserController {
-
   public async execute(
     request: Request,
     response: Response,
   ) {
-    
     const createUsersService = new CreateUser(new PrismaUsersRepository());
     const bodyParams: ICreateUser = request.body;
-    
+
     if (!bodyParams) {
-      throw new AppError(`Your request Body is invalid`);
+      throw new AppError('Your request Body is invalid');
     }
     if (!bodyParams.email) {
       throw new AppError(`Email is proprety required ${bodyParams.email}`);
@@ -32,29 +30,28 @@ export default class CreateUserController {
     const result = await createUsersService.create({
       email,
       password,
-      username
+      username,
     });
 
     if (result.isLeft()) {
       throw new AppError(`Username is proprety required ${bodyParams.username}`);
     }
 
-    request.debug(`User created -> Id = ${result.value.uid}`)
-    request.debug(`Logging in User -> Id = ${result.value.uid}`)
+    request.debug(`User created -> Id = ${result.value.uid}`);
+    request.debug(`Logging in User -> Id = ${result.value.uid}`);
 
     const userAuth = await new Authenticator(new PrismaUsersRepository()).authUser({
-      email: email,
-      password: password
+      email,
+      password,
     });
 
     if (userAuth.isLeft()) {
       return response.json(result.value.user);
     }
 
-    return response.json({
+    return response.status(201).json({
       ...result.value.user,
-      token: userAuth.value.token
+      token: userAuth.value.token,
     });
-
   }
 }
