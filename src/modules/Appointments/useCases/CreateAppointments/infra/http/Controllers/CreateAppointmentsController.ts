@@ -18,8 +18,8 @@ export default class CreateAppointmentsController {
     if (!body.price) {
       throw new AppError('Price is required');
     }
-    if (!body.dateAppointments) {
-      throw new AppError('dateAppointments is required');
+    if (!body.date) {
+      throw new AppError('date is required');
     }
     if (!body.description) {
       throw new AppError('Description is required');
@@ -30,7 +30,7 @@ export default class CreateAppointmentsController {
 
     const appointmentProps = {
       price: body.price,
-      dateAppointments: body.dateAppointments,
+      dateAppointments: body.date,
       description: body.description,
       user_id: request.user.id,
     };

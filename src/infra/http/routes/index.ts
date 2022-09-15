@@ -94,6 +94,92 @@ routes.use('/docs', (request: Request, response: Response) => {
         },
       },
     },
+    appointments: {
+      post: {
+        '/appointments': {
+          description: 'Create a new appointment',
+          body: {
+            type: 'object',
+            properties: {
+              date: {
+                type: 'string',
+                description: 'Appointment date',
+              },
+              price: {
+                type: 'number',
+                description: 'Appointment price',
+              },
+              description: {
+                type: 'string',
+                description: 'Appointment description',
+              },
+            },
+          },
+          response: {
+            201: {
+              type: 'object',
+              properties: {
+                id: {
+                  type: 'string',
+                  description: 'Appointment id',
+                },
+                date: {
+                  type: 'string',
+                  description: 'Appointment date',
+                },
+                price: {
+                  type: 'number',
+                  description: 'Appointment price',
+                },
+                description: {
+                  type: 'string',
+                  description: 'Appointment description',
+                },
+                user_id: {
+                  type: 'string',
+                  description: 'Appointment user id',
+                },
+              },
+            },
+          },
+        },
+      },
+      get: {
+        '/appointments/list': {
+          description: 'List all appointments',
+          response: {
+            200: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  id: {
+                    type: 'string',
+                    description: 'Appointment id',
+                  },
+                  date: {
+                    type: 'string',
+                    description: 'Appointment date',
+                  },
+                  price: {
+                    type: 'number',
+                    description: 'Appointment price',
+                  },
+                  description: {
+                    type: 'string',
+                    description: 'Appointment description',
+                  },
+                  user_id: {
+                    type: 'string',
+                    description: 'Appointment user id',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   });
 });
 
