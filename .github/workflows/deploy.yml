@@ -21,15 +21,6 @@ jobs:
           source: '.'
           target: '/var/www/agendator-backend.velloware.com'
           overwrite: true
-      - name: Executing remote command
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          PORT: ${{ secrets.PORT }}
-          script: ls
-
       - name: Deployng the project branch ${{ github.ref_name }} in /var/www/agendator-backend.velloware.com
         uses: appleboy/ssh-action@master
         with:
@@ -48,4 +39,4 @@ jobs:
             pm2 link ${{ secrets.PM2A }} ${{ secrets.PM2B }}
             pm2 delete agendator - Server
             pm2 start ecosystem.config.js
-            curl --request POST --url https://dash.velloware.com/api/notification --header 'Content-Type: application/json' --data '{"message": "\n Deploing Agendator Backend - ⛑${{ github.ref_name }}📣📢\n on Vello-1-server (acess: agendator-backend.velloware.com)"}'
+            curl --request POST --url https://dash.velloware.com/api/notification --header 'Content-Type: application/json' --data '{"message": "Deploing Agendator Backend - ⛑${{ github.ref_name }}📢\n on Vello-1-server (acess: agendator-backend.velloware.com)"}'

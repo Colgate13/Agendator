@@ -1,7 +1,7 @@
 import { Either, left, right } from '../../../../core/logic/Either';
 import { Email } from '../../Domain/Email';
 import { InvalidEmailError } from '../../Domain/Errors/InvalidEmailError';
-import { InvalidPassword } from '../../Domain/Errors/invalidPasswordError';
+import { InvalidPassword } from '../../Domain/Errors/InvalidPasswordError';
 import { Password } from '../../Domain/Password';
 import { User } from '../../Domain/User';
 import { IUsersRepository } from '../../repositories/IUsersRepository';

@@ -1,6 +1,6 @@
 import { User } from './User';
 import { Email } from './Email';
-import { Password } from '../Domain/Password';
+import { Password } from './Password';
 
 const email = Email.create('gabreilbarros13@gmail.com');
 const password = Password.create('84656505');
@@ -44,13 +44,17 @@ describe('Test User (Password, Email)', () => {
       email: email.value,
       password: password.value,
       username: 'Gabriel',
-    },'uuidHere');
+    }, 'uuidHere');
 
     if (user.isLeft()) {
       throw Error('User don`t create');
     }
 
     expect(user.value.uid).toEqual('uuidHere');
+    expect(user.value.user).toEqual({
+      id: 'uuidHere',
+      email: email.value.value,
+      username: 'Gabriel',
+    });
   });
-
 });

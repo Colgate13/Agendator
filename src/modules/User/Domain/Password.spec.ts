@@ -1,6 +1,5 @@
-import { InvalidPassword } from './Errors/invalidPasswordError';
+import { InvalidPassword } from './Errors/InvalidPasswordError';
 import { Password } from './Password';
-import { comparePassword, hashedPassword } from '../../../shared/Utils/PassCrypt';
 
 describe('Test Password', () => {
   it('should be a create Password isRight', () => {
