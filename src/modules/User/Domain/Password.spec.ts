@@ -1,4 +1,4 @@
-import { InvalidPassword } from './Errors/InvalidPasswordError';
+import { InvalidPasswordError } from './Errors/InvalidPasswordError';
 import { Password } from './Password';
 
 describe('Test Password', () => {
@@ -19,8 +19,8 @@ describe('Test Password', () => {
       throw Error('Password valid');
     }
 
-    expect(password.value).toBeInstanceOf(InvalidPassword);
-    expect(password.value).toBeInstanceOf(InvalidPassword);
+    expect(password.value).toBeInstanceOf(InvalidPasswordError);
+    expect(password.value).toBeInstanceOf(InvalidPasswordError);
   });
 
   it('should be a comparePassword isRight and comparePassword hashedPassword isRight', async () => {

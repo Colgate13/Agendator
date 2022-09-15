@@ -1,7 +1,7 @@
 import { Either, left, right } from '../../../../core/logic/Either';
 import { Email } from '../../Domain/Email';
 import { InvalidEmailError } from '../../Domain/Errors/InvalidEmailError';
-import { InvalidPassword } from '../../Domain/Errors/InvalidPasswordError';
+import { InvalidPasswordError } from '../../Domain/Errors/InvalidPasswordError';
 import { Password } from '../../Domain/Password';
 import { User } from '../../Domain/User';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
@@ -13,7 +13,7 @@ export interface ICreateUser {
   password: string;
 }
 
-type CreateUserReturn = Either<InvalidEmailError | InvalidPassword, User>;
+type CreateUserReturn = Either<InvalidEmailError | InvalidPasswordError, User>;
 
 export class CreateUser {
   protected userRepository: IUsersRepository;

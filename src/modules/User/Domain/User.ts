@@ -1,7 +1,7 @@
 import { Entity } from '../../../core/domain/Entity';
 import { Either, left, right } from '../../../core/logic/Either';
 import { InvalidEmailError } from './Errors/InvalidEmailError';
-import { InvalidPassword } from './Errors/InvalidPasswordError';
+import { InvalidPasswordError } from './Errors/InvalidPasswordError';
 import { InvalidUsernameError } from './Errors/InvalidUsernameError';
 import { IUser, IUserView } from './IUser';
 
@@ -37,7 +37,7 @@ export class User extends Entity<IUser> {
   static create(
     UserProps: IUser,
     uid?: string,
-  ): Either<InvalidEmailError | InvalidPassword | InvalidUsernameError, User> {
+  ): Either<InvalidEmailError | InvalidPasswordError | InvalidUsernameError, User> {
     if (!UserProps.username) {
       return left(new InvalidUsernameError());
     }

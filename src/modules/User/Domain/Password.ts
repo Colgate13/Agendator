@@ -1,6 +1,6 @@
 import { Either, left, right } from '../../../core/logic/Either';
 import { comparePassword, hashedPassword } from '../../../shared/Utils/PassCrypt';
-import { InvalidPassword } from './Errors/InvalidPasswordError';
+import { InvalidPasswordError } from './Errors/InvalidPasswordError';
 
 export class Password {
   private password: string;
@@ -56,9 +56,9 @@ export class Password {
   static create(
     password: string,
     hashed = false,
-  ): Either<InvalidPassword, Password> {
+  ): Either<InvalidPasswordError, Password> {
     if (!this.validate(password)) {
-      return left(new InvalidPassword());
+      return left(new InvalidPasswordError());
     }
 
     return right(new Password(password, hashed));
