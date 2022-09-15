@@ -24,7 +24,7 @@ export class JWT {
   }
 
   // public getUserId(): Either<InvalidJWTTokenError, string> {
-  //   const jwtPayloadOrError = JWT.decodeToken(this.token)
+  //   const jwtPayloadOrError = JWT.verifyAndDecodeToken(this.token)
 
   //   if (jwtPayloadOrError.isLeft()) {
   //     return left(jwtPayloadOrError.value)
@@ -35,7 +35,7 @@ export class JWT {
   //   return right(userId)
   // }
 
-  static decodeToken(
+  static verifyAndDecodeToken(
     token: string,
   ): Either<InvalidJWTTokenError, JWTTokenPayload> {
     try {
@@ -48,7 +48,7 @@ export class JWT {
   }
 
   static createFromJWT(token: string): Either<InvalidJWTTokenError, JWT> {
-    const jwtPayloadOrError = this.decodeToken(token);
+    const jwtPayloadOrError = this.verifyAndDecodeToken(token);
 
     if (jwtPayloadOrError.isLeft()) {
       return left(jwtPayloadOrError.value);

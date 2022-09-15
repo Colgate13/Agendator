@@ -57,7 +57,7 @@ describe('JWT model', () => {
 
     const jwt = JWT.signUser(user);
 
-    const decodedOrError = JWT.decodeToken(jwt.token);
+    const decodedOrError = JWT.verifyAndDecodeToken(jwt.token);
     const decoded = decodedOrError.value as JWTTokenPayload;
 
     expect(decodedOrError.isRight()).toBe(true);
@@ -66,7 +66,7 @@ describe('JWT model', () => {
   });
 
   it('should not be able to decode invalid JWT token', () => {
-    const jwtOrError = JWT.decodeToken('invalid-token');
+    const jwtOrError = JWT.verifyAndDecodeToken('invalid-token');
 
     expect(jwtOrError.isLeft()).toBe(true);
     expect(jwtOrError.value).toEqual(new InvalidJWTTokenError());

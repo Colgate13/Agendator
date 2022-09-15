@@ -4,12 +4,14 @@ import {
 import 'express-async-errors';
 
 import users from './users.routes';
+import appointments from './appointments.routes';
 
 export const routesCreator = Router();
 
 const routes = Router();
 
 routes.use('/users', users);
+routes.use('/appointments', appointments);
 
 // Create docs route for json schem of routes
 routes.use('/docs', (request: Request, response: Response) => {
