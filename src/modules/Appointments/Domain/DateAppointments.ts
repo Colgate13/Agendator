@@ -1,5 +1,7 @@
+import {
+  startOfHour, isBefore, getHours, format,
+} from 'date-fns';
 import { Either, left, right } from '../../../core/logic/Either';
-import { startOfHour, isBefore, getHours, format } from 'date-fns';
 import { InvalidDate } from './Errors/InvalidDate';
 
 export class DateAppointments {
@@ -15,7 +17,7 @@ export class DateAppointments {
 
   public validateAppointments(dateProps: Date = this.date) {
     if (isBefore(dateProps, Date.now())) {
-      return false
+      return false;
     }
 
     return true;
@@ -25,10 +27,9 @@ export class DateAppointments {
     const date = new DateAppointments(dateProps);
 
     if (!date.validateAppointments()) {
-      return left(new InvalidDate())
+      return left(new InvalidDate());
     }
 
     return right(date);
   }
-
 }

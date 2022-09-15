@@ -2,13 +2,13 @@ import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import cluster from 'cluster';
 import * as http from 'http';
+import Debug from 'debug';
 import routes from './routes/index';
 import ProcessController from '../process/Controller';
 import { AppError } from '../../shared/Error/AppError';
-import Debug from 'debug';
 
 class ServerHttp {
-  public debug = Debug("app:infra:http");
+  public debug = Debug('app:infra:http');
   protected app;
   public multiProcess;
   protected server;
@@ -54,7 +54,7 @@ class ServerHttp {
 
   middlewareHandlerErrors() {
     this.app.use((err: Error, request: Request, response: Response, _next: NextFunction) => {
-      this.debug(err)
+      this.debug(err);
       if (err instanceof AppError) {
         return response.status(err.statusCode).json({
           status: 'error',

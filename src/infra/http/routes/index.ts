@@ -4,12 +4,14 @@ import {
 import 'express-async-errors';
 
 import users from './users.routes';
+import appointments from './appointments.routes';
 
 export const routesCreator = Router();
 
 const routes = Router();
 
 routes.use('/users', users);
+routes.use('/appointments', appointments);
 
 // Create docs route for json schem of routes
 routes.use('/docs', (request: Request, response: Response) => {
@@ -84,6 +86,92 @@ routes.use('/docs', (request: Request, response: Response) => {
                   token: {
                     type: 'string',
                     description: 'User token',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    appointments: {
+      post: {
+        '/appointments': {
+          description: 'Create a new appointment',
+          body: {
+            type: 'object',
+            properties: {
+              date: {
+                type: 'string',
+                description: 'Appointment date',
+              },
+              price: {
+                type: 'number',
+                description: 'Appointment price',
+              },
+              description: {
+                type: 'string',
+                description: 'Appointment description',
+              },
+            },
+          },
+          response: {
+            201: {
+              type: 'object',
+              properties: {
+                id: {
+                  type: 'string',
+                  description: 'Appointment id',
+                },
+                date: {
+                  type: 'string',
+                  description: 'Appointment date',
+                },
+                price: {
+                  type: 'number',
+                  description: 'Appointment price',
+                },
+                description: {
+                  type: 'string',
+                  description: 'Appointment description',
+                },
+                user_id: {
+                  type: 'string',
+                  description: 'Appointment user id',
+                },
+              },
+            },
+          },
+        },
+      },
+      get: {
+        '/appointments/list': {
+          description: 'List all appointments',
+          response: {
+            200: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  id: {
+                    type: 'string',
+                    description: 'Appointment id',
+                  },
+                  date: {
+                    type: 'string',
+                    description: 'Appointment date',
+                  },
+                  price: {
+                    type: 'number',
+                    description: 'Appointment price',
+                  },
+                  description: {
+                    type: 'string',
+                    description: 'Appointment description',
+                  },
+                  user_id: {
+                    type: 'string',
+                    description: 'Appointment user id',
                   },
                 },
               },
