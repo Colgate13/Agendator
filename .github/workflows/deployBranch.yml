@@ -5,10 +5,10 @@ on: 'pull_request'
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Fetch API Data 📦
         uses: JamesIves/fetch-api-data-action@releases/v1
         with:
           ENDPOINT: https://dash.velloware.com/api/notification
-          CONFIGURATION: '{ "method": "POST", "headers": { "Content-Type": "application/json" }, "body": {"message": "\n Create Pull Request - ⛑${{ github.ref_name }}📣📢 on Agendator Backend\n on Push(Vello-1-server) (acess: https://github.com/velloware/Agendator/pull/${{ github.ref_name }})"} }'
+          CONFIGURATION: '{ "method": "POST", "headers": { "Content-Type": "application/json" }, "body": {"message": "Create Pull Request - ⛑${{ github.ref_name }}📣📢 on Agendator Backend\n on Push(Vello-1-server) (acess: https://github.com/velloware/Agendator/pull/${{ github.ref_name }})"} }'
