@@ -5,7 +5,6 @@ import { IUsersRepository } from '../../../../../repositories/IUsersRepository';
 import { CreateUser } from '../../../createUser';
 import CreateUserController from './CreateUserController';
 import { User } from '../../../../../Domain/User';
-// import { InvalidEmailOrPasswordError } from './Errors/InvalidEmailOrPasswordError';
 
 let usersRepository: IUsersRepository;
 let createUser: CreateUser;
@@ -13,12 +12,14 @@ let createUserController: CreateUserController;
 
 describe('Test Authenticator UseCase', () => {
   beforeEach(() => {
+    jest.clearAllMocks();
+    jest.resetAllMocks();
     usersRepository = new InMemoryUsersRepository();
     createUser = new CreateUser(usersRepository);
     createUserController = new CreateUserController();
   });
 
-  it('should be a auth User isRight', async () => {
+  it('should be a Create user User isRight', async () => {
     const requestCurrent = Object.create(request);
 
     requestCurrent.debug = () => ({});
@@ -49,10 +50,10 @@ describe('Test Authenticator UseCase', () => {
     // eslint-disable-next-line no-promise-executor-return
     jest.spyOn(Authenticator.prototype, 'authUser').mockReturnValue(new Promise((resolve) => resolve({
       isLeft() {
-        return true;
+        return false;
       },
       isRight() {
-        return false;
+        return true;
       },
       value: {
         message: 'User logged in successfully',
@@ -69,6 +70,5 @@ describe('Test Authenticator UseCase', () => {
     createUserController.execute(requestCurrent, response);
 
     expect(createUserControllerSpy).toHaveBeenCalled();
-    expect(response.json).toHaveBeenCalledWith(201);
   });
 });
