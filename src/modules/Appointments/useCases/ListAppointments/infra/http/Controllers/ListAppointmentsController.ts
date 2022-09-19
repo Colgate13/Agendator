@@ -16,10 +16,10 @@ export default class CreateAppointmentsController {
 
     const list = await listAppointments.listAppointmentsByUser(request.user.id);
 
-    if (!list) {
+    if (list.isLeft()) {
       throw new AppError('Invalid For List appointments', 400);
     }
 
-    return response.status(200).json(list);
+    return response.status(200).json(list.value);
   }
 }

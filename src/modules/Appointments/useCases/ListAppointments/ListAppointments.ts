@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 // import { Appointments } from '../../Domain/Appointments';
+import { Either, right } from '../../../../core/logic/Either';
 import { IAppointmentsRepository } from '../../repositories/IAppointmentsRepository';
 
 interface IAppointmentReturn {
@@ -10,7 +11,7 @@ interface IAppointmentReturn {
   user_id: string;
 }
 
-type listAppointments = IAppointmentReturn[];
+type listAppointments = Either<Error, IAppointmentReturn[]>;
 
 export class ListAppointments {
   protected appointmentRepository: IAppointmentsRepository;
@@ -22,12 +23,12 @@ export class ListAppointments {
   async listAppointmentsByUser(user_id: string): Promise<listAppointments> {
     const appointments = await this.appointmentRepository.listByUser(user_id);
 
-    return appointments.map((appointment) => ({
+    return right(appointments.map((appointment) => ({
       id: appointment.uid,
       date: appointment.date,
       price: appointment.price,
       description: appointment.description,
       user_id: appointment.user_id,
-    }));
+    })));
   }
 }

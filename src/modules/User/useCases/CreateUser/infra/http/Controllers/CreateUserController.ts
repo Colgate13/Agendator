@@ -34,7 +34,7 @@ export default class CreateUserController {
     });
 
     if (result.isLeft()) {
-      throw new AppError(`Username is proprety required ${bodyParams.username}`);
+      throw new AppError(`User not created ${result.value.message}`);
     }
 
     request.debug(`User created -> Id = ${result.value.uid}`);

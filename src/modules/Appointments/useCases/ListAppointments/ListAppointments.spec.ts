@@ -35,8 +35,12 @@ describe('Test UseCase Create Appointments', () => {
       objToCreate.user_id,
     );
 
-    expect(appointments[0].price).toEqual(objToCreate.price);
-    expect(appointments[0].description).toEqual(objToCreate.description);
-    expect(appointments[0].user_id).toEqual(objToCreate.user_id);
+    if (appointments.isLeft()) {
+      throw new Error('Error list appointments ERROR');
+    }
+
+    expect(appointments.value[0].price).toEqual(objToCreate.price);
+    expect(appointments.value[0].description).toEqual(objToCreate.description);
+    expect(appointments.value[0].user_id).toEqual(objToCreate.user_id);
   });
 });
