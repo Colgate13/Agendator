@@ -40,6 +40,32 @@ Backend Agenda Online -> Full Test Unit
 - [x] Full test unit 100% coverage
 
 
+## Installation and run
+
+```yarn 
+git clone https://github.com/velloware/Agendator.git
+npm ci i
+npm run-script test
+npm run-script dev
+
+$ > Server is running in 3000!
+```
+
+## Deploy and run
+
+```yarn 
+git clone https://github.com/velloware/Agendator.git
+npm install pm2 -g
+npm ci i
+npm run build
+npm run prisma:deploy
+pm2 link ${{ secrets.PM2A }} ${{ secrets.PM2B }}
+pm2 delete agendator - Server
+pm2 start ecosystem.config.js
+
+$ > Server is running in 3000!
+```
+
 ## License
 
 <div id="license"></div>
