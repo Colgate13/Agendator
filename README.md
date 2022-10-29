@@ -11,7 +11,7 @@
 
 <div id="about"></div>
 
-Backend Agenda Online -> Full Test Unit
+Backend Agenda Online, onde é possível marcar criar um usuario, logar nele, criar agendar compromissões e lista-los
 
 ## Tecnologias 🐱‍🏍🎂
 
