@@ -23,15 +23,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/velloware/Agendator.git"
+    "url": "git+https://github.com/Colgate13/Agendator.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/velloware/Agendator/issues"
+    "url": "https://github.com/Colgate13/Agendator/issues"
   },
-  "homepage": "https://github.com/velloware/Agendator#readme",
+  "homepage": "https://github.com/Colgate13/Agendator#readme",
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
