@@ -66,6 +66,185 @@ pm2 start ecosystem.config.js
 $ > Server is running in 3000!
 ```
 
+# Usage
+```
+curl ip:PORT/docs
+
+curl localhost:3000/docs
+```
+
+# /docs
+```json
+{
+  "users": {
+    "post": {
+      "/users": {
+        "description": "Create a new user",
+        "body": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "User username"
+            },
+            "email": {
+              "type": "string",
+              "description": "User email"
+            },
+            "password": {
+              "type": "string",
+              "description": "User password"
+            }
+          }
+        },
+        "response": {
+          "201": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "User id"
+              },
+              "username": {
+                "type": "string",
+                "description": "User username"
+              },
+              "email": {
+                "type": "string",
+                "description": "User email"
+              },
+              "token": {
+                "type": "string",
+                "description": "User token"
+              }
+            }
+          }
+        }
+      },
+      "/users/auth": {
+        "description": "Authenticate a user",
+        "body": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "User email"
+            },
+            "password": {
+              "type": "string",
+              "description": "User password"
+            }
+          },
+          "response": {
+            "200": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "User message"
+                },
+                "token": {
+                  "type": "string",
+                  "description": "User token"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "appointments": {
+    "post": {
+      "/appointments": {
+        "description": "Create a new appointment",
+        "body": {
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "string",
+              "description": "Appointment date"
+            },
+            "price": {
+              "type": "number",
+              "description": "Appointment price"
+            },
+            "description": {
+              "type": "string",
+              "description": "Appointment description"
+            }
+          }
+        },
+        "response": {
+          "201": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Appointment id"
+              },
+              "date": {
+                "type": "string",
+                "description": "Appointment date"
+              },
+              "price": {
+                "type": "number",
+                "description": "Appointment price"
+              },
+              "description": {
+                "type": "string",
+                "description": "Appointment description"
+              },
+              "user_id": {
+                "type": "string",
+                "description": "Appointment user id"
+              }
+            }
+          }
+        }
+      }
+    },
+    "get": {
+      "/appointments/list": {
+        "description": "List all appointments",
+        "response": {
+          "200": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Appointment id"
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Appointment date"
+                },
+                "price": {
+                  "type": "number",
+                  "description": "Appointment price"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Appointment description"
+                },
+                "user_id": {
+                  "type": "string",
+                  "description": "Appointment user id"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+
+
 ## License
 
 <div id="license"></div>
