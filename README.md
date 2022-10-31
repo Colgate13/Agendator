@@ -43,7 +43,7 @@ Backend Agenda Online, onde é possível marcar criar um usuario, logar nele, cr
 ## Installation and run
 
 ```yarn 
-git clone https://github.com/velloware/Agendator.git
+git clone https://github.com/Colgate13/Agendator.git
 npm ci i
 npm run-script test
 npm run-script dev
@@ -54,7 +54,7 @@ $ > Server is running in 3000!
 ## Deploy and run
 
 ```yarn 
-git clone https://github.com/velloware/Agendator.git
+git clone https://github.com/Colgate13/Agendator.git
 npm install pm2 -g
 npm ci i
 npm run build
